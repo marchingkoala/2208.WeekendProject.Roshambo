@@ -1,7 +1,7 @@
 {
   "name": "juke",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Setup",
   "main": "index.js",
   "scripts": {
     "start": "npm run start-server & npm run build-watch",
@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "pg": "^8.3.2",
+    "react-router-dom": "^6.4.2",
     "sequelize": "^6.3.4",
     "volleyball": "^1.5.1"
   },
@@ -28,5 +29,17 @@
     "react-dom": "^18.2.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
-  }
+  },
+  "bin": {
+    "juke": "bin/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marchingkoala/2208.WeekendProject.Roshambo.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/marchingkoala/2208.WeekendProject.Roshambo/issues"
+  },
+  "homepage": "https://github.com/marchingkoala/2208.WeekendProject.Roshambo#readme"
 }
