@@ -9,6 +9,7 @@ const Leaderboard = ({
   players,
   selectedPlayer,
 }) => {
+  
   useEffect(() => {
     fetchingPlayers();
   }, []);
@@ -21,7 +22,7 @@ const Leaderboard = ({
           return (
             <div key={player.id}>
               <div className="playerLinkButton">
-                {/* <Link to={`/leaderboard/${player.id}`}> */}
+                <Link to={`/leaderboard/${player.id}`}>
                   <button
                     onClick={() => {
                       selectingPlayer(player.id);
@@ -32,17 +33,8 @@ const Leaderboard = ({
                       {player.username}
                     </p>
                   </button>
-                {/* </Link> */}
+                </Link>
               </div>
-
-              {/* <Routes>
-                <Route
-                  exact path={`/leaderboard/${player.id}`}
-                  element={
-                    <SinglePlayer />
-                  }
-                />
-              </Routes> */}
             </div>
           );
         })}

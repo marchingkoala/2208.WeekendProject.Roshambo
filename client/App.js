@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Leaderboard from './components/Leaderboard';
+import Home from './components/Home'
+import SinglePlayer from './components/SinglePlayer';
 
 const App = () => {
 
   const [players, setPlayers] = useState([])
   const [selectedPlayer, setSelectedPlayer] = useState({})
+  const [doneLoading, setDoneLoading] = useState(false)
 
     const fetchingPlayers = async () => {
       const fetchedData = await fetch("/api/players");
@@ -16,38 +19,35 @@ const App = () => {
 
     const selectingPlayer = async (playerId) =>{
       const fetchingPlayer = await fetch(`/api/players/${playerId}`);
-      const json = fetchingPlayer.json()
+      const json = await fetchingPlayer.json()
       setSelectedPlayer(json)
-      console.log(json)
+      setDoneLoading(true)
     }
 
   return (
-    <div className="row container">
-      {/* The game starts here! */}
-      <div className="mainPage">
-        <h1 className="mainPage_header">Welcome to RPS Arena!</h1>
-
-        <div className="mainButton">
-          <Link to="/leaderboard">
-            <button className="leaderButton">Leader Board</button>
-          </Link>
-          <button className="playButton">Play</button>
-        </div>
-      </div>
-      <Routes>
-        <Route
-          path="/leaderboard/*"
-          element={
-            <Leaderboard
-              fetchingPlayers={fetchingPlayers}
-              players={players}
-              selectingPlayer={selectingPlayer}
-              selectedPlayer={selectedPlayer}
-            />
-          }
-        />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route
+        path="/leaderboard"
+        element={
+          <Leaderboard
+            fetchingPlayers={fetchingPlayers}
+            players={players}
+            selectingPlayer={selectingPlayer}
+            selectedPlayer={selectedPlayer}
+          />
+        }
+      />
+      <Route
+        path="/leaderboard/:id"
+        element={
+          <SinglePlayer
+            selectedPlayer={selectedPlayer}
+            doneLoading={doneLoading}
+          />
+        }
+      ></Route>
+    </Routes>
   );
 };
 
