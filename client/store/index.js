@@ -3,6 +3,6 @@ import gameReducer from "./gameSlice";
 
 export default configureStore({
     reducer: {
-        game: gameReducer
+        game: gameReducer,
     }
-})
+});
