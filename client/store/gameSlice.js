@@ -8,11 +8,13 @@ const initialState = {
 export const gameSlice = createSlice({
   name: "game",
   initialState,
-  reducer: {
+  reducers: {
     setAllPlayers: (state, action) => {
       state.allPlayers = action.payload
     },
-    setSelectedPlayers: () => {},
+    setSelectedPlayers: (state, action) => {
+      state.selectedPlayer = action.payload
+    },
     addPlayer: () => {},
   },
 });
