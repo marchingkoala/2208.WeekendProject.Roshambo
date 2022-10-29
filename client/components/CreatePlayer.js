@@ -1,21 +1,25 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { addPlayer } from '../store/gameSlice'
 
 const CreatePlayer = () => {
 
-    const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("")
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-    const usernameHandler = (event) =>{
-        setUsername(event.target.value)
-    }
+  const usernameHandler = (event) => {
+      setUsername(event.target.value);
+    };
 
-    const enterTheWarrior = async (event) =>{
+  const enterTheWarrior = async (event) =>{
         event.preventDefault();
-
-        const body = { username: username}
-
-        const res = await axios.post("/api/players", body)
-        console.log(res);
+        const { data: created } = await axios.post("/api/players", {username : username});
+        dispatch(addPlayer(created))
+        console.log(created);
+        navigate("/leaderboard");
     }
 
 
